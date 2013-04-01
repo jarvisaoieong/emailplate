@@ -62,7 +62,7 @@ module.exports = class Emailplate
   # @api public
   #
   
-  render: (theme, options, fn) ->
+  render: (theme, options, fn, count = '') ->
     if _.isFunction options
       fn = options
       options = {}
@@ -74,7 +74,7 @@ module.exports = class Emailplate
         html: (cb) ->
           cons[info.template.engine] "#{themeDir}/html.#{info.template.extension}", options, cb
         css: (cb) ->
-          fs.readFile "#{themeDir}/style.styl", 'utf-8', (err, content) ->
+          fs.readFile "#{themeDir}/style#{count}.styl", 'utf-8', (err, content) ->
             stylus.render content, cb
       ,
         (err, results) ->

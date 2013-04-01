@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "mocha"
   },
   "license": "MIT",
   "description": "The email template loader",
@@ -14,7 +14,7 @@
     "async": "~0.1.22",
     "consolidate": "~0.4.0",
     "stylus": "~0.29.0",
-    "juice": "git://github.com/kinua/juice.git#patch-1",
+    "juice": "~0.3.2",
     "eco": "~1.1.0-rc-3",
     "handlebars": "~1.0.6-2",
     "jade": "~0.27.2",
