@@ -1,12 +1,19 @@
 {
   "name": "emailplate",
+  "description": "The email template loader",
   "version": "0.1.0",
+  "keywords": [
+    "email",
+    "template",
+    "theme"
+  ],
   "main": "index.js",
+  "author": "Jarvis AI <kinua1230@gmail.com>",
+  "repository": "git://github.com/kinua/emailplate.git",
   "scripts": {
     "test": "mocha"
   },
   "license": "MIT",
-  "description": "The email template loader",
   "dependencies": {
     "coffee-script": "~1.6.3",
     "underscore": "~1.4.4",
