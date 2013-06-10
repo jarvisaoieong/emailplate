@@ -2,7 +2,11 @@
   "name": "sample",
   "template": {
     "engine": "jade",
-    "extension": "jade"
+    "file": "html.jade"
+  },
+  "style": {
+    "engine": "stylus",
+    "file": "style.styl"
   },
   "locals": {
     "name": "Jarvis"

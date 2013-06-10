@@ -2,7 +2,11 @@
   "name": "blueprint",
   "template": {
     "engine": "handlebars",
-    "extension": "hbs"
+    "file": "html.hbs"
+  },
+  "style": {
+    "engine": "stylus",
+    "file": "style.styl"
   },
   "locals": {
     "description": "This is description",

@@ -8,9 +8,10 @@ var emailplate = new Emailplate({
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   emailplate.render('blueprint', function(err, html){
+    if (err) return console.log(err);
     res.write(html);
     res.end();
   });
-}).listen(1337);
+}).listen(3000);
 
-console.log('Server running at http://0.0.0.0:1337');
+console.log('Server running at http://0.0.0.0:3000');

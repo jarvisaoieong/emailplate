@@ -35,7 +35,7 @@ emailplates
 
 - html.<ext>
 
-  emailplate support jade, handlebars, eco, ejs template engine
+  emailplate support most template engine that consolidate.js supported
 
 [consolidate.js]: https://github.com/visionmedia/consolidate.js
 
