@@ -6,9 +6,10 @@
   },
   "style": {
     "engine": "stylus",
-    "file": "style.styl"
+    "file": "style.styl"    
   },
   "locals": {
-    "name": "jarvis"
+    "name": "jarvis",
+    "stylus": ""
   }
 }
