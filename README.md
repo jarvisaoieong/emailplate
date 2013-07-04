@@ -33,17 +33,17 @@ emailplates
     `-- style.styl
 ```
 
-- html.<ext>
+- html.(html|hbs|eco|jade|...)
 
   emailplate support most template engine that consolidate.js supported
 
 [consolidate.js]: https://github.com/visionmedia/consolidate.js
 
-- style.stylus
+- style.styl
 
   We use stylus because it can support css, sass, less basic syntax. It is robust.
 
-- emailplate.json
+- emailplate.(json|js|coffee)
 
   We need some information about the theme setting.
 

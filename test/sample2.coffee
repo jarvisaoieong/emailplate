@@ -9,15 +9,14 @@ describe "handlebars test", ->
 
   it 'should register a helper', (done) ->
     @emailplate.render 'sample2', 
-      name: 'jarvis'
+      name: 'kinua'
       helpers: 
         dear: (name) ->
           "dear #{name}"
     , 
       (err, html) ->
-        html.should.match /dear jarvis/
+        html.should.match /dear kinua/
         done()
-
 
   it 'should render inline css html', (done) ->
     @emailplate.render 'sample2', (err, html) ->

@@ -1,7 +1,7 @@
 {
   "name": "emailplate",
   "description": "The email template loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "email",
     "template",
