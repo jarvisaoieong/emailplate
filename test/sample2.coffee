@@ -24,4 +24,15 @@ describe "handlebars test", ->
       html.should.match /h1 style/
       done()
 
+  it 'should register some stylusSetting', (done) ->
+    @emailplate.render 'sample2', 
+      name: 'kinua'
+      stylus:
+        imageColor1: 'green'  
+        imageColor2: 'white' 
+    , 
+      (err, html) ->
+        html.should.match /dear kinua/
+        done()
+
 
