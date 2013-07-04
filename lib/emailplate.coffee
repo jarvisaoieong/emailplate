@@ -66,11 +66,11 @@ module.exports = class Emailplate
         cons[info.template.engine] "#{themeDir}/#{info.template.file}", data, cb
       css: (cb) ->
         fs.readFile "#{themeDir}/#{info.style.file}", 'utf-8', (err, content) ->
-          setting = stylus(content)
-          for key of data.stylus
-            setting.define(key, data.stylus[key])
-          setting.render (err, css)->
-            stylus.render css, cb
+          stylusObj = stylus(content)
+          if _.isObject data.stylus
+            _.each data.stylus, (value, key) ->  
+              stylusObj.define(key, value)
+          stylusObj.render cb
     ,
       (err, results) ->
         html = juice results.html, results.css

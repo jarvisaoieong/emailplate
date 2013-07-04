@@ -8,7 +8,6 @@ module.exports =
     file: 'style.styl'
   locals:
     name: 'jarvis'
-    stylus: ""
     helpers: 
       dear: (name) ->
         "dear #{name}."

@@ -9,7 +9,6 @@
     "file": "style.styl"    
   },
   "locals": {
-    "name": "jarvis",
-    "stylus": ""
+    "name": "jarvis"
   }
 }

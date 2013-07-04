@@ -33,6 +33,7 @@ describe "handlebars test", ->
     , 
       (err, html) ->
         html.should.match /dear kinua/
+        html.should.match /h2 style/
         done()
 
 
