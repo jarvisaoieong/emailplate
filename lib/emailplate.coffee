@@ -61,16 +61,43 @@ module.exports = class Emailplate
     themeDir = "#{@options.views}/#{theme}"
     info = require "#{themeDir}/emailplate"
     data = _.defaults data, info.locals
+
+    if(_.isArray info.style.file)
+      async.auto
+        readfile: (ffn) ->
+          async.map info.style.file.map((d) -> themeDir + '/' + d), fs.readFile, ffn
+        doit: ['readfile', (ffn, result) ->
+          ffn null, result
+        ]
+      , (err, results) ->
+
     async.parallel
       html: (cb) ->
         cons[info.template.engine] "#{themeDir}/#{info.template.file}", data, cb
       css: (cb) ->
-        fs.readFile "#{themeDir}/#{info.style.file}", 'utf-8', (err, content) ->
-          setting = stylus(content)
-          for key of data.stylus
-            setting.define(key, data.stylus[key])
-          setting.render (err, css)->
-            stylus.render css, cb
+        if(_.isArray info.style.file)
+          async.auto
+            readfile: (ffn) ->
+              async.map info.style.file.map((d) -> themeDir + '/' + d), fs.readFile, ffn
+            cssset: ['readfile', (ffn, result) ->
+                results = ""
+                _.each result.readfile, (result) ->
+                  results += result
+                ffn null ,results
+            ]
+          , (err, results) ->
+            setting = stylus(results.cssset)
+            for key of data.stylus
+              setting.define(key, data.stylus[key])
+            setting.render (err, css)->
+              stylus.render css, cb
+        else
+          fs.readFile "#{themeDir}/#{info.style.file}", 'utf-8', (err, content) ->
+            setting = stylus(content)
+            for key of data.stylus
+              setting.define(key, data.stylus[key])
+            setting.render (err, css)->
+              stylus.render css, cb
     ,
       (err, results) ->
         html = juice results.html, results.css
