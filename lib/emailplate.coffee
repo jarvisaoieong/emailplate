@@ -62,15 +62,6 @@ module.exports = class Emailplate
     info = require "#{themeDir}/emailplate"
     data = _.defaults data, info.locals
 
-    if(_.isArray info.style.file)
-      async.auto
-        readfile: (ffn) ->
-          async.map info.style.file.map((d) -> themeDir + '/' + d), fs.readFile, ffn
-        doit: ['readfile', (ffn, result) ->
-          ffn null, result
-        ]
-      , (err, results) ->
-
     async.parallel
       html: (cb) ->
         cons[info.template.engine] "#{themeDir}/#{info.template.file}", data, cb
@@ -79,14 +70,14 @@ module.exports = class Emailplate
           async.auto
             readfile: (ffn) ->
               async.map info.style.file.map((d) -> themeDir + '/' + d), fs.readFile, ffn
-            cssset: ['readfile', (ffn, result) ->
+            data: ['readfile', (ffn, res) ->
                 results = ""
-                _.each result.readfile, (result) ->
+                _.each res.readfile, (result) ->
                   results += result
                 ffn null ,results
             ]
           , (err, results) ->
-            setting = stylus(results.cssset)
+            setting = stylus(results.data)
             for key of data.stylus
               setting.define(key, data.stylus[key])
             setting.render (err, css)->

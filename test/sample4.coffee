@@ -21,6 +21,7 @@ describe "handlebars test", ->
   it 'should render inline css html', (done) ->
     @emailplate.render 'sample4', (err, html) ->
       html.should.be.a 'string'
+      html.should.match /h1 style/
       done()
 
   it 'should register some stylusSetting', (done) ->
