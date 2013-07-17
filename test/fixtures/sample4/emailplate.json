@@ -1,0 +1,14 @@
+{
+  "name": "sample4",
+  "template": {
+    "engine": "handlebars",
+    "file": "html.hbs"
+  },
+  "style": {
+    "engine": "stylus",
+    "file": [
+      "style.styl",
+      "style2.styl"
+    ]    
+  }
+}

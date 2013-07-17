@@ -61,11 +61,17 @@ module.exports = class Emailplate
     themeDir = "#{@options.views}/#{theme}"
     info = require "#{themeDir}/emailplate"
     data = _.defaults data, info.locals
+
     async.parallel
       html: (cb) ->
         cons[info.template.engine] "#{themeDir}/#{info.template.file}", data, cb
       css: (cb) ->
-        fs.readFile "#{themeDir}/#{info.style.file}", 'utf-8', (err, content) ->
+        info.style.file = [info.style.file] unless _.isArray info.style.file
+        parallel = _.map info.style.file, (path) ->
+          (fn) -> 
+            fs.readFile "#{themeDir}/#{path}", 'utf-8', fn
+        async.parallel parallel, (err, results) ->
+          content = results.join '\n'
           stylusObj = stylus(content)
           if _.isObject data.stylus
             _.each data.stylus, (value, key) ->  
