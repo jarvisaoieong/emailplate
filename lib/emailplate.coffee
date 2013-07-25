@@ -53,7 +53,7 @@ module.exports = class Emailplate
   # @param {Function} fn
   # @api public
   #
-  
+
   render: (theme, data, fn) ->
     if _.isFunction data
       fn = data
@@ -64,17 +64,18 @@ module.exports = class Emailplate
 
     async.parallel
       html: (cb) ->
-        cons[info.template.engine] "#{themeDir}/#{info.template.file}", data, cb
+        fs.readFile "#{themeDir}/#{info.template.file}", 'utf-8', (err, result) ->
+          cons[info.template.engine].render result, data, cb
       css: (cb) ->
         info.style.file = [info.style.file] unless _.isArray info.style.file
         parallel = _.map info.style.file, (path) ->
-          (fn) -> 
+          (fn) ->
             fs.readFile "#{themeDir}/#{path}", 'utf-8', fn
         async.parallel parallel, (err, results) ->
           content = results.join '\n'
           stylusObj = stylus(content)
           if _.isObject data.stylus
-            _.each data.stylus, (value, key) ->  
+            _.each data.stylus, (value, key) ->
               stylusObj.define(key, value)
           stylusObj.render cb
     ,
